@@ -60,3 +60,4 @@ jobs:
           artifacts: darwin-amd64.zip, freebsd-amd64.zip, linux-amd64.zip, linux-arm.zip, linux-386.zip, windows-amd64.zip, windows-386.zip, windows-arm.zip
           body: Builds builds for all platforms.
           name: Initial Build
+          tags: build
