@@ -1,0 +1,64 @@
+name: Build
+on: workflow_dispatch
+
+jobs:
+  Build:
+    
+    runs-on: ubuntu-latest
+    steps:
+      
+      - name: Setup Go environment
+        uses: actions/setup-go@v3.0.0
+      
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install -y zip
+          go mod download
+      
+      - name: Build darwin-amd64 binary
+        run: |
+          GOOS=darwin GOARCH=amd64 go build
+          zip -r darwin-amd64.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build freebsd-amd64 binary
+        run: |
+          GOOS=freebsd GOARCH=amd64 go build
+          zip -r freebsd-amd64.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build linux-amd64 binary
+        run: |
+          GOOS=linux GOARCH=amd64 go build
+          zip -r linux-amd64.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build linux-arm binary
+        run: |
+          GOOS=linux GOARCH=arm go build
+          zip -r linux-arm.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build linux-386 binary
+        run: |
+          GOOS=linux GOARCH=386 go build
+          zip -r linux-386.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build windows-amd64 binary
+        run: |
+          GOOS=windows GOARCH=amd64 go build
+          zip -r windows-amd64.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build windows-386 binary
+        run: |
+          GOOS=windows GOARCH=386 go build
+          zip -r windows-386.zip LynXBullet etc
+          rm -rf LynXBullet
+      - name: Build windows-arm binary
+        run: |
+          GOOS=windows GOARCH=arm go build
+          zip -r windows-arm.zip LynXBullet etc
+          rm -rf LynXBullet
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1.9.0
+        with:
+          artifacts: darwin-amd64.zip, freebsd-amd64.zip, linux-amd64.zip, linux-arm.zip, linux-386.zip, windows-amd64.zip, windows-386.zip, windows-arm.zip
+          body: Builds builds for all platforms.
+          name: Initial Build
