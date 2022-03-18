@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"math/rand"
 	"net/http"
 	"os"
 	"os/exec"
-	"path"
 	"runtime"
 	"strconv"
 	"strings"
@@ -27,7 +27,7 @@ func main() {
 	fmt.Printf("Enter number of threads: ")
 	fmt.Scanln(&MaxThreads_)
 	MaxThreads, _ = strconv.Atoi(MaxThreads_)
-	
+
 	if runtime.GOOS == "windows" {
 		exec.Command("cls").Run()
 	} else {
@@ -115,6 +115,6 @@ func PrepareHeaders(req *http.Request) {
 }
 
 func GetUAList() []string {
-	ua, _ := os.ReadFile(path.Join("etc", "ua.txt"))
+	ua, _ := ioutil.ReadFile("etc/ua.txt")
 	return strings.Split(string(ua), "\n")
 }
