@@ -15,42 +15,42 @@ jobs:
       
       - name: Build darwin-amd64 binary
         run: |
-          GOOS=darwin GOARCH=amd64 go build
+          env GOOS=darwin GOARCH=amd64 go build
           zip -r darwin-amd64.zip LynXBullet etc
           rm -rf LynXBullet
       - name: Build freebsd-amd64 binary
         run: |
-          GOOS=freebsd GOARCH=amd64 go build
+          env GOOS=freebsd GOARCH=amd64 go build
           zip -r freebsd-amd64.zip LynXBullet etc
           rm -rf LynXBullet
       - name: Build linux-amd64 binary
         run: |
-          GOOS=linux GOARCH=amd64 go build
+          env GOOS=linux GOARCH=amd64 go build
           zip -r linux-amd64.zip LynXBullet etc
           rm -rf LynXBullet
       - name: Build linux-arm binary
         run: |
-          GOOS=linux GOARCH=arm go build
+          env GOOS=linux GOARCH=arm go build
           zip -r linux-arm.zip LynXBullet etc
           rm -rf LynXBullet
       - name: Build linux-386 binary
         run: |
-          GOOS=linux GOARCH=386 go build
+          env GOOS=linux GOARCH=386 go build
           zip -r linux-386.zip LynXBullet etc
           rm -rf LynXBullet
       - name: Build windows-amd64 binary
         run: |
-          GOOS=windows GOARCH=amd64 go build
+          env GOOS=windows GOARCH=amd64 go build
           zip -r windows-amd64.zip LynXBullet.exe etc
           rm -rf LynXBullet
       - name: Build windows-386 binary
         run: |
-          GOOS=windows GOARCH=386 go build
+          env GOOS=windows GOARCH=386 go build
           zip -r windows-386.zip LynXBullet.exe etc
           rm -rf LynXBullet
       - name: Build windows-arm binary
         run: |
-          GOOS=windows GOARCH=arm go build
+          env GOOS=windows GOARCH=arm go build
           zip -r windows-arm.zip LynXBullet.exe etc
           rm -rf LynXBullet
 
